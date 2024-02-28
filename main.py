@@ -71,7 +71,7 @@ def validate_input(func: callable):
             # in that case I raise error.
         elif not your_guess.isalpha():
             raise ValueError("Not a letter. Input must contain only one LETTER from alphabet")
-        elif your_guess in guessed_letters:
+        elif your_guess in guessed_letters or your_guess in correct_letters:
             print(f"You already guessed letter {your_guess}. Try another one.")
         elif your_guess not in current_word:
             print(f"validate input test for{current_word}")
@@ -114,7 +114,10 @@ def winning_conditions():
     :return: True
     :rtype: bool
     """
-    pass
+    if len(set(correct_letters)) == len(set(current_word)):
+        print("Congratulations! You have guessed all letters correctly!")
+        return True
+
 
 def losing_conditions():
     """Check losing conditions.
@@ -150,10 +153,13 @@ if __name__ == "__main__":
     count = 0
     while True:
         print(user_input())
+        if winning_conditions():
+            break
         # temporary printed
-        print(guessed_letters)
+        print(f"Correct letters {guessed_letters}")
+        print(f"Correct letters {correct_letters}")
 
         #temporary
         count += 1
-        if count == 3:
+        if count == 10:
             break
