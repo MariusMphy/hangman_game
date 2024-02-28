@@ -141,6 +141,10 @@ def user_input():
     a = input(f"Guess a letter: ")
     return a
 
+def draw_hanged_man():
+    for _ in range(6):
+        print "_"
+
 
 
 if __name__ == "__main__":
