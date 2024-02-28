@@ -59,6 +59,7 @@ def validate_input(func: callable):
     2. Check if input is letter
     3. Check if input (letter) was not guessed before and add it to guessed_letters list
     4. check if letter is in the word and if not, add it to guessed_letters list
+    5. check if letters in current word, if so, append them to correct letters list
 
     :return: letter in lowercase
     :rtype: str
@@ -66,34 +67,36 @@ def validate_input(func: callable):
     def wrapper():
         your_guess = func().lower()
         if not len(your_guess) == 1:
-            # in this case I just print a message.
             print("Wrong input length. Please enter just ONE letter.")
-            # in that case I raise error.
         elif not your_guess.isalpha():
-            raise ValueError("Not a letter. Input must contain only one LETTER from alphabet")
+            print("Not a letter. Input must contain only one LETTER from alphabet")
         elif your_guess in guessed_letters or your_guess in correct_letters:
             print(f"You already guessed letter {your_guess}. Try another one.")
+            display_word()
         elif your_guess not in current_word:
-            print(f"validate input test for{current_word}")
             guessed_letters.append(your_guess)
+            print(f"There is NO letter - {your_guess} - in this word")
+            display_word()
         elif your_guess in current_word:
             correct_letters.append(your_guess)
-            display_word(your_guess)
-            print()
-            print("Test validate input")
-
-        # else place letter instead of underscore. prepare empty underscore displayed.
-        print("Please enter the letter")
+            print(f"Correct! There IS letter - {your_guess} - in this word")
+            display_word()
         return your_guess
     return wrapper
 
 
-def display_word(your_guess):
+def display_word():
+    print("Your word is:", end=" ")
     for letter in current_word:
         if letter in correct_letters:
             print(letter, end=" ")
         else:
             print("_", end=" ")
+    print()
+    print(f"Current guessed letters are: ", end="")
+    for letter in guessed_letters + correct_letters:
+        print(letter, end=" ")
+    print()
 
 
 def winning_conditions():
@@ -104,6 +107,7 @@ def winning_conditions():
     :rtype: bool
     """
     if len(set(correct_letters)) == len(set(current_word)):
+        print()
         print(f"Congratulations! You have guessed all letters correctly! \n"
               f"The answer is {current_word}")
         return True
@@ -119,9 +123,11 @@ def losing_conditions():
     :rtype: bool
     """
     if len(guessed_letters) == 6:
+        print()
         print(f"Six incorrect guesses. You lost the game and got hanged. \n"
               f"Correct answer is {current_word}. See you next time!")
         return True
+
 
 @validate_input
 def user_input():
@@ -131,30 +137,21 @@ def user_input():
     :return: user input
     :rtype: str
     """
-    # a = "B"
-    a = input(f"Enter a letter: ")
+    print()
+    a = input(f"Guess a letter: ")
     return a
 
-#create letter
+
 
 if __name__ == "__main__":
     # print temporary
     current_word = (get_word())
     print(current_word)
-
-    # count temporary
+    # b = input(f"Guess a letter: ")
     count = 0
     while True:
-        print(user_input())
+        user_input()
         if winning_conditions():
             break
         if losing_conditions():
-            break
-        # temporary printed
-        print(f"Wrong letters {guessed_letters}")
-        print(f"Correct letters {correct_letters}")
-
-        #temporary
-        count += 1
-        if count == 10:
             break
