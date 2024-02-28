@@ -2,7 +2,7 @@
 Hangman game.
 Input:
     - We prepare list of words in file.
-    - user writes in the letter
+    - user inputs the letter
     - user must guess the word
 
 Output:
@@ -31,6 +31,7 @@ Steps.
 import random
 
 guessed_letters = []
+correct_letters = []
 
 
 def get_word():
@@ -56,30 +57,50 @@ def validate_input(func: callable):
     """ Validating input.
     1. Check if input length is equal 1
     2. Check if input is letter
-    3. Check if input (letter) was not guessed before
+    3. Check if input (letter) was not guessed before and add it to guessed_letters list
+    4. check if letter is in the word and if not, add it to guessed_letters list
 
     :return: letter in lowercase
     :rtype: str
     """
     def wrapper():
-        result = func().lower()
-        if not len(result) == 1:
+        your_guess = func().lower()
+        if not len(your_guess) == 1:
             # in this case I just print a message.
             print("Wrong input length. Please enter just ONE letter.")
             # in that case I raise error.
-        elif not result.isalpha():
+        elif not your_guess.isalpha():
             raise ValueError("Not a letter. Input must contain only one LETTER from alphabet")
-        elif result in guessed_letters:
-            print(f"You already guessed letter {result}. Try another one.")
-        elif result not in get_word():
-            guessed_letters.append(result)
+        elif your_guess in guessed_letters:
+            print(f"You already guessed letter {your_guess}. Try another one.")
+        elif your_guess not in current_word:
+            print(f"validate input test for{current_word}")
+            guessed_letters.append(your_guess)
+        elif your_guess in current_word:
+            correct_letters.append(your_guess)
+            display_word(your_guess)
+            print()
+            print("Test validate input")
+
         # else place letter instead of underscore. prepare empty underscore displayed.
-
-
-
         print("Please enter the letter")
-        return result
+        return your_guess
     return wrapper
+
+
+def display_word(your_guess):
+    for letter in current_word:
+        if letter in correct_letters:
+            print(letter, end=" ")
+        else:
+            print("_", end=" ")
+
+
+def display_guessed_letters():
+    print(f"Current guessed letters: {None}")
+
+
+
 
 
 def check_word():
@@ -114,15 +135,17 @@ def user_input():
     :return: user input
     :rtype: str
     """
-    a = "B"
-    # a = input(f"Enter a letter: ")
+    # a = "B"
+    a = input(f"Enter a letter: ")
     return a
 
 #create letter
 
 if __name__ == "__main__":
     # print temporary
-    print(get_word())
+    current_word = (get_word())
+    print(current_word)
+
     # count temporary
     count = 0
     while True:
