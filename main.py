@@ -96,17 +96,6 @@ def display_word(your_guess):
             print("_", end=" ")
 
 
-def display_guessed_letters():
-    print(f"Current guessed letters: {None}")
-
-
-
-
-
-def check_word():
-    pass
-
-
 def winning_conditions():
     """Check winning conditions.
     1. Check, if all letters is finished.
@@ -115,7 +104,8 @@ def winning_conditions():
     :rtype: bool
     """
     if len(set(correct_letters)) == len(set(current_word)):
-        print("Congratulations! You have guessed all letters correctly!")
+        print(f"Congratulations! You have guessed all letters correctly! \n"
+              f"The answer is {current_word}")
         return True
 
 
@@ -123,12 +113,15 @@ def losing_conditions():
     """Check losing conditions.
     1. Check how many guesses.
         if >= 6, then player lost.
-    2. Check, if man is hanged.
+
 
     :return: True
     :rtype: bool
     """
-    pass
+    if len(guessed_letters) == 6:
+        print(f"Six incorrect guesses. You lost the game and got hanged. \n"
+              f"Correct answer is {current_word}. See you next time!")
+        return True
 
 @validate_input
 def user_input():
@@ -155,8 +148,10 @@ if __name__ == "__main__":
         print(user_input())
         if winning_conditions():
             break
+        if losing_conditions():
+            break
         # temporary printed
-        print(f"Correct letters {guessed_letters}")
+        print(f"Wrong letters {guessed_letters}")
         print(f"Correct letters {correct_letters}")
 
         #temporary
