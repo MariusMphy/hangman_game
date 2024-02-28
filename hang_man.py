@@ -9,7 +9,8 @@ def draw_hanged_man_0():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
-
+    print()
+    print("Six incorrect guesses left!")
 
 def draw_hanged_man_x():
     for _ in range(2):
@@ -23,7 +24,8 @@ def draw_hanged_man_x():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
-
+    print()
+    print("Six incorrect guesses left!")
 
 
 def draw_hanged_man_1():
@@ -39,6 +41,8 @@ def draw_hanged_man_1():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
+    print()
+    print("Five incorrect guesses left!")
 
 
 def draw_hanged_man_2():
@@ -55,6 +59,8 @@ def draw_hanged_man_2():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
+    print()
+    print("Four incorrect guesses left!")
 
 
 def draw_hanged_man_3():
@@ -72,7 +78,8 @@ def draw_hanged_man_3():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
-
+    print()
+    print("Three incorrect guesses left!")
 
 def draw_hanged_man_4():
     for _ in range(2):
@@ -90,7 +97,8 @@ def draw_hanged_man_4():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
-
+    print()
+    print("Two incorrect guesses left")
 
 def draw_hanged_man_5():
     for _ in range(2):
@@ -109,7 +117,8 @@ def draw_hanged_man_5():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
-
+    print()
+    print("Last incorrect guess left !")
 
 def draw_hanged_man_6():
     for _ in range(2):
@@ -129,7 +138,4 @@ def draw_hanged_man_6():
         print("      " + "|")
     for _ in range(7):
         print("-", end="")
-
-
-
-
+    print()
