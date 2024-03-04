@@ -112,48 +112,20 @@ class Main:
         :return: one of hang_man drawings from hang_man.py
         :rtype: callable
         """
-        drawing_list = ["  -----", "  |   |", "  O   |", " ---  |", "/ | \\ |", "  |   |", " ---  |", "/   \\ |",
-                        "|   | |", "      |", "-------"]
-
-        if len(self.guessed_letters) == 6:
-            for item in drawing_list:
-                print(item)
-        elif len(self.guessed_letters) == 5:
-            for item in drawing_list[0:8]:
-                print(item)
-            for item in range(2):
-                print(drawing_list[9])
-            print(drawing_list[10])
-        elif len(self.guessed_letters) == 4:
-            for item in drawing_list[0:7]:
-                print(item)
-            for item in range(3):
-                print(drawing_list[9])
-            print(drawing_list[10])
-        elif len(self.guessed_letters) == 3:
-            for item in drawing_list[0:6]:
-                print(item)
-            for item in range(4):
-                print(drawing_list[9])
-            print(drawing_list[10])
-        elif len(self.guessed_letters) == 2:
-            for item in drawing_list[0:5]:
-                print(item)
-            for item in range(5):
-                print(drawing_list[9])
-            print(drawing_list[10])
-        elif len(self.guessed_letters) == 1:
-            for item in drawing_list[0:4]:
-                print(item)
-            for item in range(6):
-                print(drawing_list[9])
-            print(drawing_list[10])
-        elif len(self.guessed_letters) == 0:
-            for item in drawing_list[0:2]:
-                print(item)
-            for item in range(8):
-                print(drawing_list[9])
-            print(drawing_list[10])
+        drawing_list = ["  O   |", " ---  |", "/ | \\ |", "  |   |", " ---  |", "/   \\ |",
+                        "|   | |"]
+        print("  -----")
+        print("  |   |")
+        for index, line in enumerate(self.guessed_letters):
+            print(drawing_list[index])
+        for item in range(7-len(self.guessed_letters)):
+            if len(self.guessed_letters) == 6:
+                print(drawing_list[6])
+            else:
+                print("      |")
+        print("      |")
+        print("-------")
+        print(f"{6-len(self.guessed_letters)} incorrect guesses left.")
 
 
 if __name__ == "__main__":
